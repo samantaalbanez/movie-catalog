@@ -2,7 +2,7 @@ package br.com.samantaalbanez.moviescatalog.di
 
 import br.com.samantaalbanez.moviescatalog.BuildConfig
 import br.com.samantaalbanez.moviescatalog.core.network.AuthenticationInterceptor
-import br.com.samantaalbanez.moviescatalog.data.service.MovieService
+import br.com.samantaalbanez.moviescatalog.data.service.MoviesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,7 +59,7 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideService(retrofit: Retrofit): MovieService {
-        return retrofit.create(MovieService::class.java)
+    fun provideService(retrofit: Retrofit): MoviesService {
+        return retrofit.create(MoviesService::class.java)
     }
 }
