@@ -21,14 +21,15 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Leitura do token no local.properties (Unificado aqui)
         val properties = Properties()
         val localPropertiesFile = rootProject.file("local.properties")
         if (localPropertiesFile.exists()) {
             properties.load(localPropertiesFile.inputStream())
         }
-        val tmdbToken = properties.getProperty("TMDB_API_TOKEN", "")
-        buildConfigField("STRING", "TMDB_TOKEN", "\"$tmdbToken\"")
+        val token = properties.getProperty("API_TOKEN", "")
+
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "API_TOKEN", "\"$token\"")
     }
 
     buildTypes {
