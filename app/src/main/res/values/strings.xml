@@ -1,5 +1,5 @@
 <resources>
-    <string name="title_app">Catalog de Filmes</string>
+    <string name="title_app">Catálogo de Filmes</string>
 
     <!-- Navegação e Títulos de Tela -->
     <string name="details_title">Detalhes do Filme</string>

@@ -1,8 +1,8 @@
 package br.com.samantaalbanez.moviescatalog.di
 
 import br.com.samantaalbanez.moviescatalog.BuildConfig
-import br.com.samantaalbanez.moviescatalog.core.network.AuthenticationInterceptor
-import br.com.samantaalbanez.moviescatalog.core.network.LanguageInterceptor
+import br.com.samantaalbanez.moviescatalog.data.remote.interceptor.AuthenticationInterceptor
+import br.com.samantaalbanez.moviescatalog.data.remote.interceptor.LanguageInterceptor
 import br.com.samantaalbanez.moviescatalog.data.remote.GsonFactory
 import br.com.samantaalbanez.moviescatalog.data.remote.OkHttpClientFactory
 import br.com.samantaalbanez.moviescatalog.data.service.MovieService

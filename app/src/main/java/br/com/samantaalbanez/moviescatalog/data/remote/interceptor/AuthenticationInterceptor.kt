@@ -1,4 +1,4 @@
-package br.com.samantaalbanez.moviescatalog.core.network
+package br.com.samantaalbanez.moviescatalog.data.remote.interceptor
 
 import br.com.samantaalbanez.moviescatalog.BuildConfig
 import okhttp3.Interceptor

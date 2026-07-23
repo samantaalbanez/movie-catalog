@@ -72,11 +72,11 @@ dependencies {
     implementation(libs.androidx.material3)
 
     // Testes
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -93,5 +93,4 @@ dependencies {
 
     // Coil (Imagens)
     implementation(libs.coil.compose)
-    implementation("io.coil-kt:coil-compose:2.7.0")
 }
