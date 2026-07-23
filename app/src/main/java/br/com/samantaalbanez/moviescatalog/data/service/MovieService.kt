@@ -1,7 +1,7 @@
 package br.com.samantaalbanez.moviescatalog.data.service
 
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDetailsDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MoviesResponseDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDetailsDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MoviesResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

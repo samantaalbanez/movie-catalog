@@ -1,8 +1,8 @@
 package br.com.samantaalbanez.moviescatalog.data.mapper
 
-import br.com.samantaalbanez.moviescatalog.data.dto.GenreDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDetailsDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.GenreDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDetailsDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDto
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

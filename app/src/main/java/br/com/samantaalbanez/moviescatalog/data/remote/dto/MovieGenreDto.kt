@@ -1,4 +1,4 @@
-package br.com.samantaalbanez.moviescatalog.data.dto
+package br.com.samantaalbanez.moviescatalog.data.remote.dto
 
 internal data class GenreDto(
     val id: Int,

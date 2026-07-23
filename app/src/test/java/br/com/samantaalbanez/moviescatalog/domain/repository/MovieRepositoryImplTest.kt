@@ -1,8 +1,8 @@
 package br.com.samantaalbanez.moviescatalog.domain.repository
 
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDetailsDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MoviesResponseDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDetailsDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MoviesResponseDto
 import br.com.samantaalbanez.moviescatalog.data.service.MovieService
 import io.mockk.coEvery
 import io.mockk.coVerify

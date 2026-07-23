@@ -1,7 +1,7 @@
 package br.com.samantaalbanez.moviescatalog.data.mapper
 
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDetailsDto
-import br.com.samantaalbanez.moviescatalog.data.dto.MovieDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDetailsDto
+import br.com.samantaalbanez.moviescatalog.data.remote.dto.MovieDto
 import br.com.samantaalbanez.moviescatalog.data.util.Constants.IMAGE_QUALITY_W500
 import br.com.samantaalbanez.moviescatalog.data.util.Constants.IMAGE_QUALITY_W780
 import br.com.samantaalbanez.moviescatalog.data.util.toImageUrl
