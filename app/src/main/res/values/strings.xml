@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">MoviesCatalog</string>
+    <string name="title_app">Catalog de Filmes</string>
+
+    <!-- Navegação e Títulos de Tela -->
+    <string name="details_title">Detalhes do Filme</string>
+
+    <!-- Seções da Home -->
+    <string name="home_trending_section">Em Alta Agora</string>
+    <string name="home_popular_section">Todos os Populares</string>
+    <string name="home_label_rating">Nota</string>
+
+    <!-- Tela de Detalhes -->
+    <string name="details_overview_title">Sinopse</string>
+    <string name="details_overview_empty">Sem sinopse disponível.</string>
+    <string name="details_runtime_format">%1$d min</string>
+
+    <!-- Ações -->
+    <string name="action_back">Voltar</string>
+    <string name="action_retry">Tentar Novamente</string>
+
+    <!-- Mensagens de Erro -->
+    <string name="error_generic">Erro ao carregar os dados. Tente novamente.</string>
+
 </resources>

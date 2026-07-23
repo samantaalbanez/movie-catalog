@@ -15,6 +15,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,12 +28,12 @@ internal fun DetailsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalhes do Filme") },
+                title = { Text(stringResource(R.string.details_title)) },
                 navigationIcon = {
                     IconButton(onClick = { onEvent(MovieDetailsUiEvent.OnBackClicked) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 }

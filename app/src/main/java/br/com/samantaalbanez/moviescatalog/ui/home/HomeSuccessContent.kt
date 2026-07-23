@@ -19,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.ui.home.components.BannerMovieCard
 import br.com.samantaalbanez.moviescatalog.ui.home.components.HorizontalMovieCard
 
@@ -59,7 +61,7 @@ internal fun HomeSuccessContent(
                     Column {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Em Alta Agora",
+                            text = stringResource(R.string.home_trending_section),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -86,7 +88,7 @@ internal fun HomeSuccessContent(
             if (state.popularMovies.isNotEmpty()) {
                 item(span = { GridItemSpan(2) }) {
                     Text(
-                        text = "Todos os Populares",
+                        text = stringResource(R.string.home_popular_section),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 8.dp)

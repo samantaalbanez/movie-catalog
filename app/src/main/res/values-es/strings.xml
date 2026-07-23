@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_app">Movies Catalog</string>
+
+    <!-- Navegación y Títulos de Pantalla -->
+    <string name="details_title">Detalles de la Película</string>
+
+    <!-- Secciones de la Home -->
+    <string name="home_trending_section">Tendencias Ahora</string>
+    <string name="home_popular_section">Todas las Populares</string>
+    <string name="home_label_rating">Calificación</string>
+
+    <!-- Pantalla de Detalles -->
+    <string name="details_overview_title">Sinopsis</string>
+    <string name="details_overview_empty">Sin sinopsis disponible.</string>
+    <string name="details_runtime_format">%1$d min</string>
+
+    <!-- Acciones y Accesibilidad -->
+    <string name="action_back">Volver</string>
+    <string name="action_retry">Reintentar</string>
+
+    <!-- Mensajes de Error -->
+    <string name="error_generic">Error al cargar los datos. Por favor, inténtalo de nuevo.</string>
+</resources>

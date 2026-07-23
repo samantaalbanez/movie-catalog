@@ -13,8 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
 import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
 
@@ -41,7 +43,7 @@ internal fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = "Movies :)")
+            TopAppBar(title = stringResource(R.string.title_app))
         }
     ) { innerPadding ->
         Box(

@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import coil.compose.AsyncImage
 
@@ -51,13 +53,13 @@ internal fun DetailsSuccessContent(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 movie.runtime?.let { duration ->
                     Text(
-                        text = "$duration min",
+                        text = stringResource(id = R.string.details_runtime_format, duration),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
-                if (movie.runtime != null && !movie.releaseDate.isNullOrEmpty()) {
+                if (movie.runtime != null && movie.releaseDate.isNotEmpty()) {
                     Text(text = " • ", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
@@ -88,12 +90,12 @@ internal fun DetailsSuccessContent(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Sinopse",
+                text = stringResource(R.string.details_overview_title),
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = movie.overview.ifEmpty { "Sem sinopse disponível." },
+                text = movie.overview.ifEmpty { stringResource(R.string.details_overview_empty) },
                 style = MaterialTheme.typography.bodyLarge
             )
         }

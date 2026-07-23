@@ -25,10 +25,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
+import br.com.samantaalbanez.moviescatalog.ui.util.toFormattedRating
 import coil.compose.AsyncImage
 
 @Composable
@@ -88,7 +91,7 @@ internal fun BannerMovieCard(
             ) {
                 Icon(
                     imageVector = Icons.Default.Star,
-                    contentDescription = "Nota",
+                    contentDescription = stringResource(R.string.home_label_rating),
                     tint = Color(0xFFFFC107),
                     modifier = Modifier.size(18.dp)
                 )
@@ -96,7 +99,7 @@ internal fun BannerMovieCard(
                 Spacer(modifier = Modifier.width(4.dp))
 
                 Text(
-                    text = String.format("%.1f", movie.voteAverage),
+                    text = movie.voteAverage.toFormattedRating(),
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White

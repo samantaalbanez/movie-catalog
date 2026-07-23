@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_app">Movies Catalog</string>
+
+    <!-- Navigation & Titles -->
+    <string name="details_title">Movie Details</string>
+
+    <!-- Home Sections -->
+    <string name="home_trending_section">Trending Now</string>
+    <string name="home_popular_section">All Popular</string>
+    <string name="home_label_rating">Rating</string>
+
+    <!-- Details Screen -->
+    <string name="details_overview_title">Overview</string>
+    <string name="details_overview_empty">No overview available.</string>
+    <string name="details_runtime_format">%1$d min</string>
+
+    <!-- Actions -->
+    <string name="action_back">Back</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- Error Messages -->
+    <string name="error_generic">Error loading data. Please try again.</string>
+</resources>
