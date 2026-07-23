@@ -3,6 +3,9 @@ package br.com.samantaalbanez.moviescatalog.di
 import br.com.samantaalbanez.moviescatalog.BuildConfig
 import br.com.samantaalbanez.moviescatalog.core.network.AuthenticationInterceptor
 import br.com.samantaalbanez.moviescatalog.data.service.MoviesService
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,13 +50,19 @@ internal object NetworkModule {
             .build()
     }
 
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
+    }
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .build()
     }
 
