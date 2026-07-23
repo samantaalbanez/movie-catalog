@@ -8,5 +8,6 @@ internal data class Movie(
     val backdropUrl: String,
     val releaseDate: String,
     val voteAverage: Double,
-    val isFavorite: Boolean = false
+    val runtime: Int? = null,
+    val genres: List<String> = emptyList()
 )

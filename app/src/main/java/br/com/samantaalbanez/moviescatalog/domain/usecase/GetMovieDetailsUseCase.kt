@@ -7,7 +7,7 @@ import javax.inject.Inject
 internal class GetMovieDetailsUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
-    suspend operator fun invoke(page: Int = 1): Result<List<Movie>> = runCatching {
-        repository.getMovies()
+    suspend operator fun invoke(id: Int): Result<Movie> = runCatching {
+        repository.getMovieDetails(movieId = id)
     }
 }

@@ -1,5 +1,6 @@
 package br.com.samantaalbanez.moviescatalog.data.service
 
+import br.com.samantaalbanez.moviescatalog.data.dto.MovieDetailsDto
 import br.com.samantaalbanez.moviescatalog.data.dto.MoviesResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,5 +21,5 @@ internal interface MovieService {
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-    ): MoviesResponseDto
+    ): MovieDetailsDto
 }

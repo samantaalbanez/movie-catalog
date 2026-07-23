@@ -1,5 +1,6 @@
 package br.com.samantaalbanez.moviescatalog.domain.repository
 
+import br.com.samantaalbanez.moviescatalog.data.mapper.detailsToDomain
 import br.com.samantaalbanez.moviescatalog.data.mapper.toDomain
 import br.com.samantaalbanez.moviescatalog.data.service.MovieService
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
@@ -14,4 +15,7 @@ internal class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getTrendingMovies(page: Int): List<Movie> =
         service.getTrendingMovies(page = page).results.map { it.toDomain() }
+
+    override suspend fun getMovieDetails(movieId: Int): Movie =
+        service.getMovieDetails(movieId).detailsToDomain()
 }

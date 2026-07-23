@@ -11,4 +11,3 @@ internal class DetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
 }
-
