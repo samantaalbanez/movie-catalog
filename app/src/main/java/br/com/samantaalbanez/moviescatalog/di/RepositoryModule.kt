@@ -1,7 +1,7 @@
 package br.com.samantaalbanez.moviescatalog.di
 
-import br.com.samantaalbanez.moviescatalog.domain.repository.MoviesRepository
-import br.com.samantaalbanez.moviescatalog.domain.repository.MoviesRepositoryImpl
+import br.com.samantaalbanez.moviescatalog.domain.repository.MovieRepository
+import br.com.samantaalbanez.moviescatalog.domain.repository.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ internal abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindMovieRepository(
-        movieRepositoryImpl: MoviesRepositoryImpl
-    ): MoviesRepository
+        movieRepositoryImpl: MovieRepositoryImpl
+    ): MovieRepository
 }

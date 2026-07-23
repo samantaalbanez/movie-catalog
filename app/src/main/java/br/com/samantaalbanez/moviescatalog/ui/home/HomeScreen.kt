@@ -1,5 +1,6 @@
 package br.com.samantaalbanez.moviescatalog.ui.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,16 +24,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.samantaalbanez.moviescatalog.ui.home.components.HeroMovieCard
-import br.com.samantaalbanez.moviescatalog.ui.home.components.HorizontalMovieCard
 import br.com.samantaalbanez.moviescatalog.ui.home.components.MovieCard
+import br.com.samantaalbanez.moviescatalog.ui.home.components.HorizontalMovieCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,8 +43,20 @@ internal fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onMovieClick: (Int) -> Unit = {}
 ) {
+    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
+
+    // Ouve os efeitos colaterais de disparo único (Navigate e Toast)
+    LaunchedEffect(Unit) {
+        viewModel.uiEffect.collect { effect ->
+            when (effect) {
+                is HomeUiEffect.NavigateToDetails -> onMovieClick(effect.movieId)
+                is HomeUiEffect.ShowToast -> {
+                    Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -56,28 +70,24 @@ internal fun HomeScreen(
             )
         }
     ) { innerPadding ->
-        // Componente de Atualização (Pull-to-Refresh)
-        PullToRefreshBox(
-            isRefreshing = isRefreshing,
-            onRefresh = { viewModel.loadPopularMovies(isRefresh = true) },
+        Box(
             modifier = modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
+            contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                when (val state = uiState) {
-                    is HomeUiState.Loading -> {
-                        CircularProgressIndicator()
-                    }
+            when (val state = uiState) {
+                is HomeUiState.Loading -> {
+                    CircularProgressIndicator()
+                }
 
-                    is HomeUiState.Success -> {
-                        val heroMovie = state.movies.firstOrNull()
-                        val trendingMovies = state.movies.drop(1).take(6)
-                        val allMovies = state.movies.drop(7)
-
+                is HomeUiState.Success -> {
+                    // PullToRefresh envoltório recebendo a flag diretamente de state.isRefreshing
+                    PullToRefreshBox(
+                        isRefreshing = state.isRefreshing,
+                        onRefresh = { viewModel.onEvent(HomeUiEvent.Refresh) },
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         LazyVerticalGrid(
                             columns = GridCells.Fixed(2),
                             contentPadding = PaddingValues(16.dp),
@@ -86,17 +96,17 @@ internal fun HomeScreen(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             // 1. HERO BANNER
-                            if (heroMovie != null) {
+                            state.bannerMovie?.let { movie ->
                                 item(span = { GridItemSpan(2) }) {
-                                    HeroMovieCard(
-                                        movie = heroMovie,
-                                        onMovieClick = onMovieClick
+                                    MovieCard (
+                                        movie = movie,
+                                        onClick = {  }
                                     )
                                 }
                             }
 
-                            // 2. SESSÃO CARROSSEL "EM ALTA"
-                            if (trendingMovies.isNotEmpty()) {
+                            // 2. SEÇÃO CARROSSEL "EM ALTA"
+                            if (state.trendingMovies.isNotEmpty()) {
                                 item(span = { GridItemSpan(2) }) {
                                     Column {
                                         Spacer(modifier = Modifier.height(8.dp))
@@ -110,12 +120,12 @@ internal fun HomeScreen(
                                             horizontalArrangement = Arrangement.spacedBy(12.dp)
                                         ) {
                                             items(
-                                                items = trendingMovies,
+                                                items = state.trendingMovies,
                                                 key = { it.id }
                                             ) { movie ->
                                                 HorizontalMovieCard(
                                                     movie = movie,
-                                                    onMovieClick = onMovieClick
+                                                    onMovieClick = { viewModel.onEvent(HomeUiEvent.OnMovieClicked(it)) }
                                                 )
                                             }
                                         }
@@ -124,35 +134,37 @@ internal fun HomeScreen(
                             }
 
                             // 3. TÍTULO "TODOS OS POPULARES"
-                            item(span = { GridItemSpan(2) }) {
-                                Text(
-                                    text = "Todos os Populares",
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.padding(top = 8.dp)
-                                )
+                            if (state.popularMovies.isNotEmpty()) {
+                                item(span = { GridItemSpan(2) }) {
+                                    Text(
+                                        text = "Todos os Populares",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier.padding(top = 8.dp)
+                                    )
+                                }
                             }
 
-                            // 4. GRADE RESTANTE
+                            // 4. GRADE RESTANTE (POPULARES)
                             items(
-                                items = allMovies,
+                                items = state.popularMovies,
                                 key = { it.id }
                             ) { movie ->
                                 MovieCard(
                                     movie = movie,
-                                    onMovieClick = onMovieClick
+                                    onClick = {  }
                                 )
                             }
                         }
                     }
+                }
 
-                    is HomeUiState.Error -> {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = state.message, color = MaterialTheme.colorScheme.error)
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Button(onClick = { viewModel.loadPopularMovies() }) {
-                                Text("Tentar Novamente")
-                            }
+                is HomeUiState.Error -> {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = state.message, color = MaterialTheme.colorScheme.error)
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Button(onClick = { viewModel.onEvent(HomeUiEvent.Retry) }) {
+                            Text("Tentar Novamente")
                         }
                     }
                 }
