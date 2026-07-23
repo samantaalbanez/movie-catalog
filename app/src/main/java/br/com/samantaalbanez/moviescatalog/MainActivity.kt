@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import br.com.samantaalbanez.moviescatalog.ui.home.HomeScreen
+import br.com.samantaalbanez.moviescatalog.ui.navigation.AppNavHost
 import br.com.samantaalbanez.moviescatalog.ui.theme.MoviesCatalogTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +23,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                    val navController = rememberNavController()
+                    AppNavHost(navController = navController)
                 }
             }
         }

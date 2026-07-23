@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
-import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorContent
+import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,7 +61,7 @@ internal fun HomeScreen(
                     )
 
                 is HomeUiState.Error ->
-                    ErrorContent(
+                    ErrorScreen(
                         message = state.message,
                         onRetry = { viewModel.onEvent(HomeUiEvent.Retry) }
                     )

@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun ErrorContent(
+internal fun ErrorScreen(
     message: String,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier
