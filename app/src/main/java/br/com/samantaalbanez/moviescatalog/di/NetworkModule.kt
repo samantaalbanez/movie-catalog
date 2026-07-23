@@ -2,9 +2,10 @@ package br.com.samantaalbanez.moviescatalog.di
 
 import br.com.samantaalbanez.moviescatalog.BuildConfig
 import br.com.samantaalbanez.moviescatalog.core.network.AuthenticationInterceptor
+import br.com.samantaalbanez.moviescatalog.core.network.LanguageInterceptor
 import br.com.samantaalbanez.moviescatalog.data.remote.GsonFactory
 import br.com.samantaalbanez.moviescatalog.data.remote.OkHttpClientFactory
-import br.com.samantaalbanez.moviescatalog.data.service.MoviesService
+import br.com.samantaalbanez.moviescatalog.data.service.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,8 +40,9 @@ internal object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         authInterceptor: AuthenticationInterceptor,
+        languageInterceptor: LanguageInterceptor,
         loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient = OkHttpClientFactory.create(authInterceptor, loggingInterceptor)
+    ): OkHttpClient = OkHttpClientFactory.create(authInterceptor, loggingInterceptor, languageInterceptor)
 
     @Provides
     @Singleton
@@ -53,6 +55,6 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMoviesService(retrofit: Retrofit): MoviesService =
-        retrofit.create(MoviesService::class.java)
+    fun provideMoviesService(retrofit: Retrofit): MovieService =
+        retrofit.create(MovieService::class.java)
 }

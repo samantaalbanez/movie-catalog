@@ -4,10 +4,10 @@ import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import br.com.samantaalbanez.moviescatalog.domain.repository.MovieRepository
 import javax.inject.Inject
 
-internal class GetMoviesUseCase @Inject constructor(
+internal class GetTrendingMoviesUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
     suspend operator fun invoke(page: Int = 1): Result<List<Movie>> = runCatching {
-        repository.getMovies()
+        repository.getTrendingMovies()
     }
 }
