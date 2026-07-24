@@ -1,20 +1,24 @@
 package br.com.samantaalbanez.moviescatalog.domain.repository
 
+import androidx.paging.PagingData
 import br.com.samantaalbanez.moviescatalog.data.mapper.detailsToDomain
-import br.com.samantaalbanez.moviescatalog.data.mapper.toDomain
 import br.com.samantaalbanez.moviescatalog.data.service.MovieService
+import br.com.samantaalbanez.moviescatalog.data.util.createMoviePager
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class MovieRepositoryImpl @Inject constructor(
     private val service: MovieService
 ) : MovieRepository {
 
-    override suspend fun getMovies(page: Int): List<Movie> =
-        service.getMovies(page = page).results.map { it.toDomain() }
+    override fun getMovies(): Flow<PagingData<Movie>> = createMoviePager { page ->
+        service.getMovies(page = page)
+    }
 
-    override suspend fun getTrendingMovies(page: Int): List<Movie> =
-        service.getTrendingMovies(page = page).results.map { it.toDomain() }
+    override fun getTrendingMovies(): Flow<PagingData<Movie>> = createMoviePager { page ->
+        service.getTrendingMovies(page = page)
+    }
 
     override suspend fun getMovieDetails(movieId: Int): Movie =
         service.getMovieDetails(movieId).detailsToDomain()

@@ -1,9 +1,11 @@
 package br.com.samantaalbanez.moviescatalog.domain.repository
 
+import androidx.paging.PagingData
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
+import kotlinx.coroutines.flow.Flow
 
 internal interface MovieRepository {
-    suspend fun getMovies(page: Int = 1): List<Movie>
-    suspend fun getTrendingMovies(page: Int = 1): List<Movie>
+    fun getMovies(): Flow<PagingData<Movie>>
+    fun getTrendingMovies(): Flow<PagingData<Movie>>
     suspend fun getMovieDetails(movieId: Int): Movie
 }

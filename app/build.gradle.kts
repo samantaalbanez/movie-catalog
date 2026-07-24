@@ -93,4 +93,11 @@ dependencies {
 
     // Coil (Imagens)
     implementation(libs.coil.compose)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+    // Paging Testing (para os testes unitários)
+    testImplementation(libs.androidx.paging.testing)
 }
