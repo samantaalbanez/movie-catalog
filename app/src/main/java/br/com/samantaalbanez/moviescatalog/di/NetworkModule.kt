@@ -1,5 +1,6 @@
 package br.com.samantaalbanez.moviescatalog.di
 
+import android.content.Context
 import br.com.samantaalbanez.moviescatalog.BuildConfig
 import br.com.samantaalbanez.moviescatalog.data.remote.interceptor.AuthenticationInterceptor
 import br.com.samantaalbanez.moviescatalog.data.remote.interceptor.LanguageInterceptor
@@ -9,6 +10,7 @@ import br.com.samantaalbanez.moviescatalog.data.service.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,8 +43,9 @@ internal object NetworkModule {
     fun provideOkHttpClient(
         authInterceptor: AuthenticationInterceptor,
         languageInterceptor: LanguageInterceptor,
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient = OkHttpClientFactory.create(authInterceptor, loggingInterceptor, languageInterceptor)
+        loggingInterceptor: HttpLoggingInterceptor,
+        @ApplicationContext context: Context,
+    ): OkHttpClient = OkHttpClientFactory.create(context = context, interceptors = arrayOf(authInterceptor, loggingInterceptor, languageInterceptor))
 
     @Provides
     @Singleton
