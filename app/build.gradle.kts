@@ -88,7 +88,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    testImplementation(libs.robolectric)
 
     // Retrofit + OkHttp
     implementation(libs.retrofit)

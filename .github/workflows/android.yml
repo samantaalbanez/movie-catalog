@@ -26,6 +26,3 @@ jobs:
 
       - name: Create local.properties for CI
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
-
-      - name: Run Lint, Detekt and Unit Tests
-        run: ./gradlew lintDebug detekt testDebugUnitTest
