@@ -28,9 +28,10 @@ jobs:
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
 
       - name: Run Detekt Analysis
-        uses: detekt/detekt-compiler-plugin@v1.23.6
-        with:
-          build_upon_default_config: true
+        run: |
+          curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+          unzip -q detekt-cli-1.23.6.zip
+         ./detekt-cli-1.23.6/bin/detekt-cli --build-upon-default-config
 
       - name: Run Android Lint & Unit Tests
         run: ./gradlew lintDebug testDebugUnitTest
