@@ -45,7 +45,11 @@ internal object NetworkModule {
         languageInterceptor: LanguageInterceptor,
         loggingInterceptor: HttpLoggingInterceptor,
         @ApplicationContext context: Context,
-    ): OkHttpClient = OkHttpClientFactory.create(context = context, interceptors = arrayOf(authInterceptor, loggingInterceptor, languageInterceptor))
+    ): OkHttpClient =
+        OkHttpClientFactory.create(
+            context = context,
+            interceptors = arrayOf(authInterceptor, loggingInterceptor, languageInterceptor)
+        )
 
     @Provides
     @Singleton
