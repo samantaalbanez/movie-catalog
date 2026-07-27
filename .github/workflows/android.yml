@@ -24,7 +24,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Create local.properties for CI
+        run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
+
       - name: Run Unit Tests
-        env:
-          API_TOKEN: "test_api_token_ci"
         run: ./gradlew testDebugUnitTest
