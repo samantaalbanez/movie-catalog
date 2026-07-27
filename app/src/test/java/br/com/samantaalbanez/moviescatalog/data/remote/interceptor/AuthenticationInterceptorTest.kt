@@ -8,9 +8,11 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
+@RunWith(RobolectricTestRunner::class)
 internal class AuthenticationInterceptorTest {
 
     private val interceptor = AuthenticationInterceptor()
@@ -34,10 +36,8 @@ internal class AuthenticationInterceptorTest {
 
         // Then
         val modifiedRequest = requestSlot.captured
-        val authHeader = modifiedRequest.header("Authorization")
 
-        assertTrue(authHeader?.startsWith("Bearer ") == true)
-        assertEquals("Bearer ${BuildConfig.API_TOKEN}", authHeader)
+        assertEquals("Bearer ${BuildConfig.API_TOKEN}", modifiedRequest.header("Authorization"))
         assertEquals("application/json", modifiedRequest.header("accept"))
     }
 
@@ -61,11 +61,9 @@ internal class AuthenticationInterceptorTest {
 
         // Then
         val modifiedRequest = requestSlot.captured
-        val authHeader = modifiedRequest.header("Authorization")
 
         assertEquals("PT-Br", modifiedRequest.header("Language"))
-        assertTrue(authHeader?.startsWith("Bearer ") == true)
-        assertEquals("Bearer ${BuildConfig.API_TOKEN}", authHeader)
+        assertEquals("Bearer ${BuildConfig.API_TOKEN}", modifiedRequest.header("Authorization"))
         assertEquals("application/json", modifiedRequest.header("accept"))
     }
 }
