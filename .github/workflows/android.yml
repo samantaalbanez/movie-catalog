@@ -34,3 +34,6 @@ jobs:
 
       - name: Run Android Lint & Unit Tests
         run: ./gradlew lintDebug testDebugUnitTest
+
+      - name: Check Proguard Build Release
+        run: ./gradlew assembleRelease
