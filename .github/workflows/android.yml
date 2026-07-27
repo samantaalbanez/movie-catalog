@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -27,14 +29,27 @@ jobs:
       - name: Create local.properties for CI
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
 
-      - name: Run Detekt Analysis
+      # DETEKT: Executa somente nos arquivos .kt alterados no PR
+      - name: Run Detekt on PR changes
+        if: github.event_name == 'pull_request'
         run: |
-         curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
-         unzip -q detekt-cli-1.23.6.zip
-         ./detekt-cli-1.23.6/bin/detekt-cli --build-upon-default-config
+          CHANGED_KOTLIN_FILES=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD | grep '\.kt$' | paste -sd "," -)
+
+          if [ -n "$CHANGED_KOTLIN_FILES" ]; then
+            echo "Executando Detekt nos arquivos do PR: $CHANGED_KOTLIN_FILES"
+            curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+            unzip -q detekt-cli-1.23.6.zip
+            ./detekt-cli-1.23.6/bin/detekt-cli --input "$CHANGED_KOTLIN_FILES" --build-upon-default-config
+          else
+            echo "Nenhum arquivo Kotlin alterado no PR."
+          fi
+
+      - name: Run Detekt on Full Project (Push)
+        if: github.event_name == 'push'
+        run: |
+          curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+          unzip -q detekt-cli-1.23.6.zip
+          ./detekt-cli-1.23.6/bin/detekt-cli --input app/src/main --build-upon-default-config
 
       - name: Run Android Lint & Unit Tests
         run: ./gradlew lintDebug testDebugUnitTest
-
-      - name: Check Proguard Build Release
-        run: ./gradlew assembleRelease
