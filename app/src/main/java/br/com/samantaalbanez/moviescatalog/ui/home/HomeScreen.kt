@@ -20,6 +20,7 @@ import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
 import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
+import br.com.samantaalbanez.moviescatalog.ui.home.components.HomeSuccessContent
 import br.com.samantaalbanez.moviescatalog.ui.home.components.skeleton.HomeSkeletonContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -88,7 +89,7 @@ internal fun HomeScreen(
                 }
 
                 else -> {
-                    _root_ide_package_.br.com.samantaalbanez.moviescatalog.ui.home.components.HomeSuccessContent(
+                    HomeSuccessContent(
                         trendingMovies = trendingMovies,
                         popularMovies = popularMovies,
                         onEvent = viewModel::onEvent
