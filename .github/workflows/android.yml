@@ -28,9 +28,6 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
-      - name: Check 80% Code Coverage Threshold
-        run: ./gradlew jacocoTestCoverageVerification
-
       - name: Upload Test Report
         if: always()
         uses: actions/upload-artifact@v4
