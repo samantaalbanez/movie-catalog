@@ -1,4 +1,4 @@
-package br.com.samantaalbanez.moviescatalog.ui.home
+package br.com.samantaalbanez.moviescatalog.ui.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,8 +29,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
-import br.com.samantaalbanez.moviescatalog.ui.home.components.BannerMovieCard
-import br.com.samantaalbanez.moviescatalog.ui.home.components.HorizontalMovieCard
+import br.com.samantaalbanez.moviescatalog.ui.home.HomeUiEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

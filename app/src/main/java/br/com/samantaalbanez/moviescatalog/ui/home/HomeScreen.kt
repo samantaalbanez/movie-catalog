@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
 import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
+import br.com.samantaalbanez.moviescatalog.ui.home.components.skeleton.HomeSkeletonContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,7 +76,7 @@ internal fun HomeScreen(
 
             when {
                 isInitialLoading -> {
-                    CircularProgressIndicator()
+                    HomeSkeletonContent()
                 }
 
                 isInitialError -> {
@@ -88,7 +88,7 @@ internal fun HomeScreen(
                 }
 
                 else -> {
-                    HomeSuccessContent(
+                    _root_ide_package_.br.com.samantaalbanez.moviescatalog.ui.home.components.HomeSuccessContent(
                         trendingMovies = trendingMovies,
                         popularMovies = popularMovies,
                         onEvent = viewModel::onEvent
