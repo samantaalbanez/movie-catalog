@@ -25,7 +25,7 @@ Um aplicativo Android moderno para exploração de filmes e tendências do cinem
 
 ## 🛠️ Arquitetura e Tecnologias
 
-O projeto segue os princípios de **Clean Architecture** combinados com o padrão visual **MVI / Unidirectional Data Flow (UDF)**.
+O projeto segue os princípios de **Clean Architecture** combinados com o padrão visual **MVI**.
 
 - **Linguagem:** [Kotlin](https://kotlinlang.org/)
 - **UI:** [Jetpack Compose](https://developer.android.com/jetpack/compose) com Material Design 3
@@ -62,7 +62,7 @@ git clone [https://github.com/samantaalbanez/movies-catalog.git](https://github.
 
 2.  Abra o projeto
 
-3. Adicione sua chave de API do TMDB no arquivo local.properties:
+3. Adicione sua chave de API do [TMDB](https://www.themoviedb.org/) no arquivo local.properties:
 
 ```agsl
 TMDB_API_KEY="SUA_CHAVE_AQUI"
