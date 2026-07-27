@@ -28,7 +28,7 @@ jobs:
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
 
       - name: Run Detekt Analysis
-        uses: detekt/detekt-action@v1.23.6
+        uses: detekt/detekt-compiler-plugin@v1.23.6
         with:
           build_upon_default_config: true
 
