@@ -29,8 +29,8 @@ jobs:
 
       - name: Run Detekt Analysis
         run: |
-          curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
-          unzip -q detekt-cli-1.23.6.zip
+         curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+         unzip -q detekt-cli-1.23.6.zip
          ./detekt-cli-1.23.6/bin/detekt-cli --build-upon-default-config
 
       - name: Run Android Lint & Unit Tests
