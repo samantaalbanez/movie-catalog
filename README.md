@@ -6,10 +6,11 @@ Um aplicativo Android moderno para exploração de filmes e tendências do cinem
 
 ## 📱 Screenshots
 
-| Home (Sucesso) | Carrossel e Grid | Estado de Erro |
-| :---: | :---: | :---: |
-| *Adicione imagem/gif* | *Adicione imagem/gif* | *Adicione imagem/gif* |
+|                  Home                |                 Tela de Detalhes                  |                 Estado de Erro                  |
+|:-------------------------------------------------:|:-------------------------------------------------:|:-----------------------------------------------:|
+| <img src="docs/images/success.gif" width="250" /> | <img src="docs/images/details.gif" width="250" /> | <img src="docs/images/error.gif" width="250" /> |
 
+---
 ---
 
 ## ✨ Funcionalidades
