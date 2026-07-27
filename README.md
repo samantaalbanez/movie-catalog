@@ -31,7 +31,7 @@ O projeto segue os princípios de **Clean Architecture** combinados com o padrã
 - **Injeção de Dependência:** [Hilt](https://dagger.dev/hilt/)
 - **Paginação:** [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - **Assincronismo & Fluxos:** [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [StateFlow / SharedFlow / Channel]
-- **Rede:** [Retrofit](https://square.github.io/retrofit/) + [Moshi](https://github.com/square/moshi) / [Gson](https://github.com/google/gson)
+- **Rede:** [Retrofit](https://square.github.io/retrofit/) / [Gson](https://github.com/google/gson)
 - **Carregamento de Imagens:** [Coil](https://coil-kt.github.io/coil/)
 - **Testes Unitários:** JUnit 4, MockK, Kotlinx Coroutines Test
 
