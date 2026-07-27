@@ -26,3 +26,11 @@ jobs:
 
       - name: Create local.properties for CI
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
+
+      - name: Run Detekt Analysis
+        uses: detekt/detekt-action@v1.23.6
+        with:
+          build_upon_default_config: true
+
+      - name: Run Android Lint & Unit Tests
+        run: ./gradlew lintDebug testDebugUnitTest
