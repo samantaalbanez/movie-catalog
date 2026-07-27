@@ -29,7 +29,6 @@ jobs:
       - name: Create local.properties for CI
         run: echo "API_TOKEN=${{ secrets.API_TOKEN }}" > local.properties
 
-      # DETEKT: Executa somente nos arquivos .kt alterados no PR
       - name: Run Detekt on PR changes
         if: github.event_name == 'pull_request'
         run: |
