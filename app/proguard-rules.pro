@@ -1,21 +1,50 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# ===================================================================
+# CONFIGURAÇÕES GERAIS E LOGS
+# ===================================================================
+# Mantém informações de linhas e arquivos para ajudar no Crashlytics / Debug
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# ===================================================================
+# RETROFIT & OKHTTP
+# ===================================================================
+-keepattributes RuntimeVisibleAnnotations,RuntimeInvisibleAnnotations
+-keepclassmembers,allowobfuscation class * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn retrofit2.**
+-dontwarn okhttp3.**
+-dontwarn okio.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# ===================================================================
+# DOMAIN / MODELS (CRÍTICO PARA SERIALIZAÇÃO)
+# ===================================================================
+# Impede a ofuscação dos seus Models de dados (DTOs/Domain) para não quebrar o JSON
+-keep class br.com.samantaalbanez.moviescatalog.domain.model.** { *; }
+-keep class br.com.samantaalbanez.moviescatalog.data.remote.model.** { *; }
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# ===================================================================
+# HILT / DAGGER
+# ===================================================================
+-keep class dagger.hilt.** { *; }
+-keep class * extends dagger.hilt.internal.UnsafeCasts { *; }
+-keep class * extends dagger.hilt.internal.GeneratedComponent { *; }
+-keep class * extends dagger.hilt.internal.GeneratedComponentManager { *; }
+
+-dontwarn dagger.hilt.**
+-dontwarn com.google.dagger.hilt.**
+
+# ===================================================================
+# JETPACK COMPOSE & PAGING
+# ===================================================================
+-keep class androidx.compose.runtime.** { *; }
+-keep class androidx.paging.** { *; }
+
+# ===================================================================
+# BUILDCONFIG
+# ===================================================================
+# Preserva a classe BuildConfig para não perder variáveis como API_TOKEN
+-keep class br.com.samantaalbanez.moviescatalog.BuildConfig { *; }
