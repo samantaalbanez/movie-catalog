@@ -2,17 +2,16 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main", "master", "develop" ]
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main", "master", "develop" ]
+    branches: [ "main", "develop" ]
 
 jobs:
-  test:
-    name: Run Unit Tests
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -26,11 +25,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest --stacktrace
-
-      - name: Upload Test Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-report
-          path: app/build/reports/tests/testDebugUnitTest/
+        run: ./gradlew testDebugUnitTest
