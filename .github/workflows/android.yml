@@ -25,4 +25,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Unit Tests
+        env:
+          API_TOKEN: "test_api_token_ci"
         run: ./gradlew testDebugUnitTest
