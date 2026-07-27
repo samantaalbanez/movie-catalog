@@ -31,9 +31,9 @@ internal class AuthenticationInterceptorTest {
         // When
         interceptor.intercept(chain)
 
+        // Then
         val modifiedRequest = requestSlot.captured
 
-        // Then
         assertEquals("Bearer ${BuildConfig.API_TOKEN}", modifiedRequest.header("Authorization"))
         assertEquals("application/json", modifiedRequest.header("accept"))
     }
@@ -56,9 +56,9 @@ internal class AuthenticationInterceptorTest {
         // When
         interceptor.intercept(chain)
 
+        // Then
         val modifiedRequest = requestSlot.captured
 
-        // Then
         assertEquals("PT-Br", modifiedRequest.header("Language"))
         assertEquals("Bearer ${BuildConfig.API_TOKEN}", modifiedRequest.header("Authorization"))
         assertEquals("application/json", modifiedRequest.header("accept"))
