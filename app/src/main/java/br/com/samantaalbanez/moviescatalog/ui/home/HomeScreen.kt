@@ -35,8 +35,16 @@ internal fun HomeScreen(
     val trendingMovies = viewModel.trendingMoviesPagingFlow.collectAsLazyPagingItems()
     val popularMovies = viewModel.moviesPagingFlow.collectAsLazyPagingItems()
 
-    ObserveLoadState(viewModel = viewModel, popularMovies = popularMovies)
-    ObserveUiEffects(viewModel = viewModel, trendingMovies = trendingMovies, popularMovies = popularMovies, onMovieClick = onMovieClick)
+    ObserveLoadState(
+        viewModel = viewModel,
+        popularMovies = popularMovies
+    )
+    ObserveUiEffects(
+        viewModel = viewModel,
+        trendingMovies = trendingMovies,
+        popularMovies = popularMovies,
+        onMovieClick = onMovieClick
+    )
 
     Scaffold(
         topBar = { TopAppBar(title = stringResource(R.string.title_app)) }
