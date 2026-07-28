@@ -18,8 +18,8 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
+import br.com.samantaalbanez.moviescatalog.ui.components.ErrorScreen
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
-import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
 import br.com.samantaalbanez.moviescatalog.ui.home.components.HomeSuccessContent
 import br.com.samantaalbanez.moviescatalog.ui.home.components.skeleton.HomeSkeletonContent
 import br.com.samantaalbanez.moviescatalog.ui.util.isInitialError
@@ -32,17 +32,59 @@ internal fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onMovieClick: (Int) -> Unit = {}
 ) {
-    val context = LocalContext.current
+    val trendingMovies = viewModel.trendingMoviesPagingFlow.collectAsLazyPagingItems()
+    val popularMovies = viewModel.moviesPagingFlow.collectAsLazyPagingItems()
 
-    val trendingMovies: LazyPagingItems<Movie> = viewModel.trendingMoviesPagingFlow.collectAsLazyPagingItems()
-    val popularMovies: LazyPagingItems<Movie> = viewModel.moviesPagingFlow.collectAsLazyPagingItems()
+    ObserveLoadState(
+        viewModel = viewModel,
+        popularMovies = popularMovies
+    )
+    ObserveUiEffects(
+        viewModel = viewModel,
+        trendingMovies = trendingMovies,
+        popularMovies = popularMovies,
+        onMovieClick = onMovieClick
+    )
 
+    Scaffold(
+        topBar = { TopAppBar(title = stringResource(R.string.title_app)) }
+    ) { innerPadding ->
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            contentAlignment = Alignment.Center
+        ) {
+            HomeContentState(
+                popularMovies = popularMovies,
+                trendingMovies = trendingMovies,
+                viewModel = viewModel
+            )
+        }
+    }
+}
+
+@Composable
+private fun ObserveLoadState(
+    viewModel: HomeViewModel,
+    popularMovies: LazyPagingItems<Movie>
+) {
     LaunchedEffect(popularMovies.loadState) {
         viewModel.onLoadStateChanged(
             loadStates = popularMovies.loadState,
             itemCount = popularMovies.itemCount
         )
     }
+}
+
+@Composable
+private fun ObserveUiEffects(
+    viewModel: HomeViewModel,
+    trendingMovies: LazyPagingItems<Movie>,
+    popularMovies: LazyPagingItems<Movie>,
+    onMovieClick: (Int) -> Unit
+) {
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.uiEffect.collect { effect ->
@@ -62,39 +104,33 @@ internal fun HomeScreen(
             }
         }
     }
+}
 
-    Scaffold(
-        topBar = {
-            TopAppBar(title = stringResource(R.string.title_app))
+@Composable
+private fun HomeContentState(
+    popularMovies: LazyPagingItems<Movie>,
+    trendingMovies: LazyPagingItems<Movie>,
+    viewModel: HomeViewModel
+) {
+    when {
+        popularMovies.isInitialLoading -> {
+            HomeSkeletonContent()
         }
-    ) { innerPadding ->
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ) {
-            when {
-                popularMovies.isInitialLoading -> {
-                    HomeSkeletonContent()
-                }
 
-                popularMovies.isInitialError -> {
-                    val errorState = popularMovies.loadState.refresh as LoadState.Error
-                    ErrorScreen(
-                        message = errorState.error.localizedMessage ?: stringResource(R.string.title_app),
-                        onRetry = { viewModel.onEvent(HomeUiEvent.Retry) }
-                    )
-                }
+        popularMovies.isInitialError -> {
+            val errorState = popularMovies.loadState.refresh as LoadState.Error
+            ErrorScreen(
+                message = errorState.error.localizedMessage ?: stringResource(R.string.title_app),
+                onRetry = { viewModel.onEvent(HomeUiEvent.Retry) }
+            )
+        }
 
-                else -> {
-                    HomeSuccessContent(
-                        trendingMovies = trendingMovies,
-                        popularMovies = popularMovies,
-                        onEvent = viewModel::onEvent
-                    )
-                }
-            }
+        else -> {
+            HomeSuccessContent(
+                trendingMovies = trendingMovies,
+                popularMovies = popularMovies,
+                onEvent = viewModel::onEvent
+            )
         }
     }
 }

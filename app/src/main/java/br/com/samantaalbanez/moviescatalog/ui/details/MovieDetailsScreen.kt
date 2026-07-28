@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import br.com.samantaalbanez.moviescatalog.R
-import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
+import br.com.samantaalbanez.moviescatalog.ui.components.ErrorScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

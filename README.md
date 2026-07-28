@@ -25,7 +25,7 @@ Um aplicativo Android moderno para exploração de filmes e tendências do cinem
 
 ## 🛠️ Arquitetura e Tecnologias
 
-O projeto segue os princípios de **Clean Architecture** combinados com o padrão visual **MVI**.
+O projeto segue os princípios de Clean Architecture e SOLID, combinados com o padrão visual MVI e alta coesão e modularização de subcomponentes de UI.
 
 - **Linguagem:** [Kotlin](https://kotlinlang.org/)
 - **UI:** [Jetpack Compose](https://developer.android.com/jetpack/compose) com Material Design 3
@@ -35,6 +35,7 @@ O projeto segue os princípios de **Clean Architecture** combinados com o padrã
 - **Rede:** [Retrofit](https://square.github.io/retrofit/) / [Gson](https://github.com/google/gson)
 - **Carregamento de Imagens:** [Coil](https://coil-kt.github.io/coil/)
 - **Testes Unitários:** JUnit 4, MockK, Kotlinx Coroutines Test
+- **Qualidade de Código & Linter:** Detekt integrado para análise estática e padronização do código Kotlin/Compose
 
 ---
 
