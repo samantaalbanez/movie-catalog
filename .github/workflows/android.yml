@@ -33,14 +33,20 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           CHANGED_KOTLIN_FILES=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD | grep '\.kt$' | paste -sd "," -)
-
+        
           if [ -n "$CHANGED_KOTLIN_FILES" ]; then
-            echo "Executando Detekt nos arquivos do PR: $CHANGED_KOTLIN_FILES"
-            curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
-            unzip -q detekt-cli-1.23.6.zip
-            ./detekt-cli-1.23.6/bin/detekt-cli --input "$CHANGED_KOTLIN_FILES" --build-upon-default-config
+          echo "Executando Detekt nos arquivos do PR: $CHANGED_KOTLIN_FILES"
+          curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+          unzip -q detekt-cli-1.23.6.zip
+        
+          curl -sSLO https://repo1.maven.org/maven2/io/nlopez/compose/rules/detekt/0.4.22/detekt-0.4.22.jar
+        
+          ./detekt-cli-1.23.6/bin/detekt-cli \
+            --input "$CHANGED_KOTLIN_FILES" \
+            --plugins detekt-0.4.22.jar \
+            --build-upon-default-config
           else
-            echo "Nenhum arquivo Kotlin alterado no PR."
+           echo "Nenhum arquivo Kotlin alterado no PR."
           fi
 
       - name: Run Detekt on Full Project (Push)
