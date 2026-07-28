@@ -20,5 +20,8 @@
     <string name="action_retry">Reintentar</string>
 
     <!-- Mensajes de Error -->
-    <string name="error_generic">Error al cargar los datos. Por favor, inténtalo de nuevo.</string>
+    <string name="error_icon_description">Ícono de error</string>
+    <string name="error_title">¡Ups! Algo salió mal</string>
+    <string name="error_generic">No se pudo cargar la información. Inténtalo de nuevo.</string>
+    <string name="retry_button">Reintentar</string>
 </resources>

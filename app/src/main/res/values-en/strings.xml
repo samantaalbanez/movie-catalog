@@ -20,5 +20,8 @@
     <string name="action_retry">Retry</string>
 
     <!-- Error Messages -->
-    <string name="error_generic">Error loading data. Please try again.</string>
+    <string name="error_icon_description">Error icon</string>
+    <string name="error_title">Oops! Something went wrong</string>
+    <string name="error_generic">Unable to load information. Please try again.</string>
+    <string name="retry_button">Try again</string>
 </resources>

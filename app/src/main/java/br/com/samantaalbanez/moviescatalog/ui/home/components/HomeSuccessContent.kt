@@ -18,6 +18,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,16 +41,37 @@ internal fun HomeSuccessContent(
     onEvent: (HomeUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isRefreshing = popularMovies.loadState.refresh is LoadState.Loading && popularMovies.itemCount > 0
+    val isTrendingRefreshing = trendingMovies.loadState.refresh is LoadState.Loading
+    val isPopularRefreshing = popularMovies.loadState.refresh is LoadState.Loading
+    val isRefreshing = isTrendingRefreshing || isPopularRefreshing
+
+    val pullToRefreshState = rememberPullToRefreshState()
 
     PullToRefreshBox(
         isRefreshing = isRefreshing,
-        onRefresh = { onEvent(HomeUiEvent.Refresh) },
+        onRefresh = {
+            trendingMovies.refresh()
+            popularMovies.refresh()
+            onEvent(HomeUiEvent.Refresh)
+        },
+        state = pullToRefreshState,
+        indicator = {
+            PullToRefreshDefaults.Indicator(
+                state = pullToRefreshState,
+                isRefreshing = isRefreshing,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
+        },
         modifier = modifier.fillMaxSize()
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(
+                top = 8.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            ),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize()
@@ -82,7 +105,7 @@ internal fun HomeSuccessContent(
                             items(
                                 count = trendingMovies.itemCount - 1,
                                 key = { index ->
-                                    trendingMovies.peek(index + 1)?.id ?: index
+                                    trendingMovies.peek(index + 1)?.id ?: "trending_$index"
                                 }
                             ) { index ->
                                 val movie = trendingMovies[index + 1]

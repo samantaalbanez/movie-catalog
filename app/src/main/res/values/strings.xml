@@ -19,6 +19,8 @@
     <string name="action_retry">Tentar Novamente</string>
 
     <!-- Mensagens de Erro -->
-    <string name="error_generic">Erro ao carregar os dados. Tente novamente.</string>
-
+    <string name="error_icon_description">Ícone de erro</string>
+    <string name="error_title">Ops! Algo deu errado</string>
+    <string name="error_generic">Não foi possível carregar as informações. Tente novamente.</string>
+    <string name="retry_button">Tentar novamente</string>
 </resources>
