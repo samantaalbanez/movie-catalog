@@ -1,4 +1,4 @@
-package br.com.samantaalbanez.moviescatalog.ui.home.components
+package br.com.samantaalbanez.moviescatalog.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -19,7 +19,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import br.com.samantaalbanez.moviescatalog.ui.components.TopAppBar
-import br.com.samantaalbanez.moviescatalog.ui.home.components.ErrorScreen
+import br.com.samantaalbanez.moviescatalog.ui.components.ErrorScreen
 import br.com.samantaalbanez.moviescatalog.ui.home.components.HomeSuccessContent
 import br.com.samantaalbanez.moviescatalog.ui.home.components.skeleton.HomeSkeletonContent
 import br.com.samantaalbanez.moviescatalog.ui.util.isInitialError
