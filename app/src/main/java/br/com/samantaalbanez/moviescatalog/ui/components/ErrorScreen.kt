@@ -74,7 +74,6 @@ internal fun ErrorScreen(
     }
 }
 
-// MARK: - Subcomponentes Privados
 
 @Composable
 private fun ErrorIcon(modifier: Modifier = Modifier) {
