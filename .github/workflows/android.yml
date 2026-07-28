@@ -32,22 +32,22 @@ jobs:
       - name: Run Detekt on PR changes
         if: github.event_name == 'pull_request'
         run: |
-            CHANGED_KOTLIN_FILES=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD | grep '\.kt$' | paste -sd "," -)
-            
-            if [ -n "$CHANGED_KOTLIN_FILES" ]; then
-              echo "Executando Detekt nos arquivos do PR: $CHANGED_KOTLIN_FILES"
-              curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
-              unzip -q detekt-cli-1.23.6.zip
-            
-              printf "naming:\n  FunctionNaming:\n    excludeAnnotatedFunctions: ['Composable']\n" > detekt.yml
-            
-              ./detekt-cli-1.23.6/bin/detekt-cli \
-                --input "$CHANGED_KOTLIN_FILES" \
-                --config detekt.yml \
-                --build-upon-default-config
-            else
-              echo "Nenhum arquivo Kotlin alterado no PR."
-            fi
+         CHANGED_KOTLIN_FILES=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD | grep '\.kt$' | paste -sd "," -)
+        
+         if [ -n "$CHANGED_KOTLIN_FILES" ]; then
+          echo "Executando Detekt nos arquivos do PR: $CHANGED_KOTLIN_FILES"
+          curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
+          unzip -q detekt-cli-1.23.6.zip
+        
+          printf "naming:\n  FunctionNaming:\n    ignoreAnnotated: ['Composable']\n" > detekt.yml
+        
+          ./detekt-cli-1.23.6/bin/detekt-cli \
+            --input "$CHANGED_KOTLIN_FILES" \
+            --config detekt.yml \
+            --build-upon-default-config
+         else
+          echo "Nenhum arquivo Kotlin alterado no PR."
+         fi
 
       - name: Run Detekt on Full Project (Push)
         if: github.event_name == 'push'
