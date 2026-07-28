@@ -39,11 +39,13 @@ jobs:
               curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
               unzip -q detekt-cli-1.23.6.zip
             
-              # Executa ignorando a regra de nomes de função (permite @Composable maiúsculo)
+              # Cria um arquivo detekt.yml real que desativa a regra de nomenclatura para funções @Composable
+              echo -e "Naming:\n  FunctionNaming:\n    excludeAnnotatedFunctions: ['Composable']" > detekt.yml
+            
               ./detekt-cli-1.23.6/bin/detekt-cli \
                 --input "$CHANGED_KOTLIN_FILES" \
-                --build-upon-default-config \
-                --config <(echo -e "Naming:\n  FunctionNaming:\n    excludeAnnotatedFunctions: ['Composable']")
+                --config detekt.yml \
+                --build-upon-default-config
             else
               echo "Nenhum arquivo Kotlin alterado no PR."
             fi
