@@ -39,11 +39,7 @@ jobs:
               curl -sSLO https://github.com/detekt/detekt/releases/download/v1.23.6/detekt-cli-1.23.6.zip
               unzip -q detekt-cli-1.23.6.zip
             
-              cat << 'EOF' > detekt.yml
-              naming:
-                FunctionNaming:
-                  excludeAnnotatedFunctions: ['Composable']
-              EOF
+              printf "naming:\n  FunctionNaming:\n    excludeAnnotatedFunctions: ['Composable']\n" > detekt.yml
             
               ./detekt-cli-1.23.6/bin/detekt-cli \
                 --input "$CHANGED_KOTLIN_FILES" \
