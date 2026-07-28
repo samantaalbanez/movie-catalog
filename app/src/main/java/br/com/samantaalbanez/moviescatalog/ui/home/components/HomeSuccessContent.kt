@@ -32,6 +32,7 @@ import androidx.paging.compose.itemKey
 import br.com.samantaalbanez.moviescatalog.R
 import br.com.samantaalbanez.moviescatalog.domain.model.Movie
 import br.com.samantaalbanez.moviescatalog.ui.home.HomeUiEvent
+import br.com.samantaalbanez.moviescatalog.ui.util.isRefreshing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,10 +42,7 @@ internal fun HomeSuccessContent(
     onEvent: (HomeUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isTrendingRefreshing = trendingMovies.loadState.refresh is LoadState.Loading
-    val isPopularRefreshing = popularMovies.loadState.refresh is LoadState.Loading
-    val isRefreshing = isTrendingRefreshing || isPopularRefreshing
-
+    val isRefreshing = trendingMovies.isRefreshing || popularMovies.isRefreshing
     val pullToRefreshState = rememberPullToRefreshState()
 
     PullToRefreshBox(
